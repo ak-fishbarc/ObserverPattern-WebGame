@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>WebGame</title>
+    {% endif %}
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
