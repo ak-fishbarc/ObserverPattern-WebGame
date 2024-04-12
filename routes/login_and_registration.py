@@ -14,3 +14,4 @@ def create_login_and_registration_blueprint():
         return render_template('register.html', title="Register")
 
     return login_and_registration_bp
+

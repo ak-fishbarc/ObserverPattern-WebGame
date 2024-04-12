@@ -12,3 +12,5 @@ def create_home_page_blueprint():
 
     return home_page_bp
 
+
+
