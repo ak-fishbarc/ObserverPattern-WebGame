@@ -22,3 +22,4 @@ def create_user_model(db):
 
     return User
 
+

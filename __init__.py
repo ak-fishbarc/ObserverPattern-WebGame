@@ -47,3 +47,6 @@ def db_migrate_upgrade(app):
     with app.app_context():
         upgrade()
 
+
+
+

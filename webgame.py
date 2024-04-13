@@ -18,3 +18,5 @@ if not path.exists('./migrations'):
 
 if __name__ == '__main__':
     game_app.run(debug=True)
+
+
