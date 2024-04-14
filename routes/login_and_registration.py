@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import render_template, redirect, url_for, flash
 import sqlalchemy
 
-from forms import LoginForm
+from forms import LoginForm, create_registration_form
 
 
 def create_login_and_registration_blueprint(app, db, user_model):
@@ -19,9 +19,17 @@ def create_login_and_registration_blueprint(app, db, user_model):
             return redirect(url_for('home_page'))
         return render_template('login.html', form=form, title="Login")
 
-    @app.route('/register')
+    @app.route('/register', methods=['POST', 'GET'])
     def register():
-        return render_template('register.html', title="Register")
+        form = create_registration_form(db, user_model)
+        if form.validate_on_submit():
+            user = user_model(username=form.username.data, email=form.email.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Registration was successful')
+            return redirect(url_for('login'))
+        return render_template('register.html', form=form, title="Register")
 
     return login_and_registration_bp
 
