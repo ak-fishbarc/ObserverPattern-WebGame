@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, init, upgrade, migrate
+from flask_mail import Mail
 
 from routes import login_and_registration as lar
 from routes import home_page as hp
@@ -10,10 +11,12 @@ def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
 
-    app.register_blueprint(hp.create_home_page_blueprint())
-    app.register_blueprint(lar.create_login_and_registration_blueprint())
-
     return app
+
+
+def create_blueprints(app, db, user_model, mail):
+    app.register_blueprint(hp.create_home_page_blueprint(app))
+    app.register_blueprint(lar.create_login_and_registration_blueprint(app, db, user_model, mail))
 
 
 def create_db(app):
@@ -48,5 +51,9 @@ def db_migrate_upgrade(app):
         upgrade()
 
 
+def create_mail(app):
+    mail = Mail(app)
+
+    return mail
 
 
