@@ -30,3 +30,8 @@ def create_registration_form(db, user_model):
                 raise ValidationError('Invalid Email')
 
     return RegistrationForm()
+
+
+class ResetPasswordForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Send Password Reset')
