@@ -36,7 +36,7 @@ def create_user_model(db):
                                 algorithms=['HS256'])['reset_password']
             except:
                 return
-            return db.session.get(User.id)
+            return db.session.get(User, id)
 
         def __repr__(self):
             return "<Username: %r>" % self.username
