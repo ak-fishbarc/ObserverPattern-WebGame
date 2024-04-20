@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>Make your clubs here!</p>
+    <form method="Post" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.howmany.label }}
+            {{ form.howmany(min=0, max=10, step=1, id='Howmany') }}
+            <p id="RangeValue"></p>
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+</body>
+</html>
