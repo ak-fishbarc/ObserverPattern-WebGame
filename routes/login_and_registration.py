@@ -7,7 +7,7 @@ from forms import LoginForm, create_registration_form
 from send_email import send_email
 
 
-def create_login_and_registration_blueprint(app, db, user_model, mail):
+def create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail):
     login_and_registration_bp = Blueprint('login_and_registration', __name__, template_folder='templates')
 
     @app.route('/login', methods=['POST', 'GET'])
@@ -33,6 +33,8 @@ def create_login_and_registration_blueprint(app, db, user_model, mail):
                        render_template("verification_email.html", verification_token=verification_token, username=form.username.data))
             db.session.add(user)
             db.session.commit()
+            username = form.username.data
+            nosql_db.cx['player_profiles'][username].insert_one({'owner': username})
             flash('Registration was successful. Please verify your email address.')
             return redirect(url_for('login'))
         return render_template('register.html', form=form, title="Register")
