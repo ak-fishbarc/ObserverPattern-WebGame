@@ -1,13 +1,14 @@
 from sqlalchemy import String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 from time import time
 import jwt
 
 
 def create_user_model(db):
 
-    class User(db.Model):
+    class User(UserMixin, db.Model):
         id: Mapped[int] = mapped_column(primary_key=True)
         username: Mapped[str] = mapped_column(String(16), index=True, unique=True)
         email: Mapped[str] = mapped_column(String(120), index=True)
