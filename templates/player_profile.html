@@ -5,6 +5,9 @@
 </head>
 <body>
     {% block body %}
+        <div id="ResourcesDisplay">
+            <p>Food: {{ resources['food'] }} Wood: {{ resources['wood'] }} Gold: {{ resources['gold'] }}</p>
+        </div>
         <div id="OptionsDisplay" style="border:1px solid #000000; width:200px; height:600px; float: left;">
         </div>
         <canvas id="GameDisplay" width="300" height="300" style="border:1px solid #000000; float: left;">

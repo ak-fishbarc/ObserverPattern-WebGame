@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, init, upgrade, migrate
 from flask_mail import Mail
 from flask_pymongo import PyMongo
+from flask_login import LoginManager
 
 from routes import login_and_registration as lar
 from routes import home_page as hp
@@ -21,7 +22,7 @@ def create_blueprints(app, db, nosql_db, user_model, mail):
     app.register_blueprint(hp.create_home_page_blueprint(app))
     app.register_blueprint(lar.create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail))
     app.register_blueprint(rp.create_reset_password_blueprint(app, db, user_model, mail))
-    app.register_blueprint(pp.create_player_profile_blueprint(app, db, user_model, mail))
+    app.register_blueprint(pp.create_player_profile_blueprint(app, db, nosql_db, user_model, mail))
 
 
 def create_db(app):
@@ -66,3 +67,9 @@ def create_mongodb(app):
     mongo_db = PyMongo(app)
 
     return mongo_db
+
+
+def create_login(app):
+    login_mg = LoginManager(app)
+
+    return login_mg

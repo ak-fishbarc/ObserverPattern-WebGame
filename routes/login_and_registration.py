@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import render_template, redirect, url_for, flash
+from flask_login import login_user
 import sqlalchemy
 from secrets import token_urlsafe
 
@@ -18,6 +19,7 @@ def create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail)
             if user is None:
                 flash('Invalid username')
                 return redirect(url_for('login'))
+            login_user(user)
             return redirect(url_for('home_page'))
         return render_template('login.html', form=form, title="Login")
 
@@ -34,7 +36,8 @@ def create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail)
             db.session.add(user)
             db.session.commit()
             username = form.username.data
-            nosql_db.cx['player_profiles'][username].insert_one({'owner': username})
+            nosql_db.cx['player_profiles'][username].insert_one({'owner': username, 'data': 'resources',
+                                                                 'food': 10, 'wood': 100, 'gold': 20})
             flash('Registration was successful. Please verify your email address.')
             return redirect(url_for('login'))
         return render_template('register.html', form=form, title="Register")
