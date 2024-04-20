@@ -5,6 +5,7 @@ class Config:
     """ GENERAL CONFIG """
     SECRET_KEY = os.environ.get('PROJECT_KEY')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    MONGO_URI = os.environ.get('DATABASE_URL2')
 
     """ MAIL CONFIG"""
     MAIL_SERVER = os.environ.get('MAIL_SERVER')

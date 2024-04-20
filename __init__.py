@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, init, upgrade, migrate
 from flask_mail import Mail
+from flask_pymongo import PyMongo
 
 from routes import login_and_registration as lar
 from routes import home_page as hp
@@ -61,3 +62,7 @@ def create_mail(app):
     return mail
 
 
+def create_mongodb(app):
+    mongo_db = PyMongo(app)
+
+    return mongo_db
