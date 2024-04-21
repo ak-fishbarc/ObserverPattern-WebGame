@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
-
 import threading
 import time
+from notifypy import Notify
 
 from forms import ProduceClubForm
 
 
-def create_unit(username, nosql_db, how_many, how_long):
+
+def create_unit(username, nosql_db, notify, how_many, how_long):
     timer_done = calculate_time(how_long)
     if timer_done:
         data_exists = nosql_db.cx['player_profiles'][username].find_one({'data': 'clubs'})
@@ -17,7 +18,13 @@ def create_unit(username, nosql_db, how_many, how_long):
         else:
             update_amount = data_exists['amount'] + how_many
             nosql_db.cx['player_profiles'][username].update_one({'data': 'clubs'}, {"$set": {'amount': update_amount}})
-    print ('Task complete!')
+    if notify:
+        notification = Notify()
+        notification.title = "Clubs Ready"
+        notification.message = "Check out your profile!"
+        notification.send()
+    print('Task complete!')
+
 
 def calculate_time(how_long):
     time_now = time.time()
@@ -37,31 +44,37 @@ def create_player_profile_blueprint(app, db, nosql_db, user_model, mail):
 
     @app.route('/produce_club/<key>', methods=['POST', 'GET'])
     def produce_club(key):
+        user_name = current_user.username
+        dict_res = {'data': 'resources'}
         max_clubs = 0
-        resources = nosql_db.cx['player_profiles'][current_user.username].find_one({'data': 'resources'})
-        if int(resources['food'] / 2) != 0 and int(resources['wood'] / 10) != 0:
-            how_many_food = int(resources['food'] / 2)
-            how_many_wood = int(resources['wood'] / 10)
+        resources = nosql_db.cx['player_profiles'][user_name].find_one(dict_res)
+        res_food = resources['food']
+        res_wood = resources['wood']
+
+        if int(res_food / 2) != 0 and int(res_wood / 10) != 0:
+            how_many_food = int(res_food / 2)
+            how_many_wood = int(res_wood / 10)
             if how_many_food <= how_many_wood:
                 max_clubs = how_many_food
             elif how_many_wood <= how_many_food:
                 max_clubs = how_many_wood
+
         form = ProduceClubForm()
         if form.validate_on_submit():
-            food_cost = form.howmany.data * 2
-            wood_cost = form.howmany.data * 10
-            resources = nosql_db.cx['player_profiles'][current_user.username].find_one({'data': 'resources'})
-            new_value_food = int(resources['food'] - food_cost)
-            new_value_wood = int(resources['wood'] - wood_cost)
+            form_data = form.howmany.data
+            food_cost = form_data * 2
+            wood_cost = form_data * 10
+            new_value_food = int(res_food - food_cost)
+            new_value_wood = int(res_wood - wood_cost)
 
-            nosql_db.cx['player_profiles'][current_user.username].update_one({'data': 'resources'},
-                                                                             {"$set": {'food': new_value_food}})
+            nosql_db.cx['player_profiles'][user_name].update_one(dict_res,
+                                                                 {"$set": {'food': new_value_food}})
 
-            nosql_db.cx['player_profiles'][current_user.username].update_one({'data': 'resources'},
-                                                                             {"$set": {'wood': new_value_wood}})
-            print(f"{form.howmany.data} clubs are being produced!")
-            t = threading.Thread(target=create_unit, args=(current_user.username, nosql_db, int(form.howmany.data),
-                                                           int(form.howmany.data * 10)))
+            nosql_db.cx['player_profiles'][user_name].update_one(dict_res,
+                                                                 {"$set": {'wood': new_value_wood}})
+            print(f"{form_data} clubs are being produced!")
+            t = threading.Thread(target=create_unit, args=(user_name, nosql_db, form.notify_me.data, int(form_data),
+                                                           int(form_data * 10)))
             t.start()
             return redirect(url_for('player_profile'))
         if not key or key != 'Ygplt7XxflI8gO2':

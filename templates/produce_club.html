@@ -14,6 +14,10 @@
             <p id="RangeValue"></p>
         </div>
         <div>
+            {{ form.notify_me.label }}
+            {{ form.notify_me() }}
+        </div>
+        <div>
             {{ form.submit() }}
         </div>
     </form>
