@@ -17,3 +17,4 @@ def create_unit(username, nosql_db, notify, unit_name, how_many, how_long):
     if notify:
         send_notification('Clubs are ready', 'Check out your new clubs!')
     print('Task complete!')
+

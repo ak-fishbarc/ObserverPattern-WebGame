@@ -6,3 +6,4 @@ def send_notification(header, body):
     notification.title = header
     notification.message = body
     notification.send()
+

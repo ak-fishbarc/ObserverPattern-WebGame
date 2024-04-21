@@ -22,3 +22,4 @@ def calculate_max_number_of_units(food_cost, wood_cost, resources_food, resource
             max_units = how_many_wood
 
     return max_units
+

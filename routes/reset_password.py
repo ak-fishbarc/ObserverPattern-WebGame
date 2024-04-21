@@ -30,3 +30,4 @@ def create_reset_password_blueprint(app, db, user_model, mail):
         return render_template('change_password.html', form=form)
 
     return reset_password_bp
+

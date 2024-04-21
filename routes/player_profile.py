@@ -49,3 +49,4 @@ def create_player_profile_blueprint(app, db, nosql_db, user_model, mail):
                                key='Ygplt7XxflI8gO2')
 
     return player_profile_bp
+
