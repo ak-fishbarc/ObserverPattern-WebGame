@@ -21,6 +21,7 @@ function fetchClubs()
         js_script.setAttribute("type", "text/javascript");
         document.head.appendChild(js_script);
         document.getElementById('OptionsDisplay').innerHTML = html;
+
     })
 }
 
