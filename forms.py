@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, EmailField, PasswordField, DecimalRangeField
+from wtforms import StringField, SubmitField, EmailField, PasswordField, DecimalRangeField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 import sqlalchemy
 
@@ -46,4 +46,5 @@ class ChangePasswordForm(FlaskForm):
 
 class ProduceClubForm(FlaskForm):
     howmany = DecimalRangeField('How many?', validators=[DataRequired()])
+    notify_me = BooleanField('Notify')
     submit = SubmitField('Create Clubs')
