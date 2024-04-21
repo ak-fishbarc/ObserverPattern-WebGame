@@ -5,7 +5,7 @@ import sqlalchemy
 from secrets import token_urlsafe
 
 from forms import LoginForm, create_registration_form
-from send_email import send_email
+from communications.send_email import send_email
 
 
 def create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail):

@@ -2,7 +2,7 @@ from forms import ResetPasswordForm, ChangePasswordForm
 from flask import Blueprint, render_template, redirect, url_for, flash
 import sqlalchemy
 
-from send_email import send_password_reset_email
+from communications.send_email import send_password_reset_email
 
 
 def create_reset_password_blueprint(app, db, user_model, mail):
