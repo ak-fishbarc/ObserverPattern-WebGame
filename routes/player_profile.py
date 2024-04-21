@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user
 import threading
 
-from forms import ProduceClubForm
+from units_folder.units_forms import ProduceClubForm
 from units_folder.create_units import create_unit
 from units_folder.units_templates import club
 from utility_functions import calculate_max_number_of_units
