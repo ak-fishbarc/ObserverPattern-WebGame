@@ -3,7 +3,6 @@ from os import path
 from __init__ import create_app, create_blueprints, create_db, create_models, create_migrate, \
     initialize_migration, db_migrate, db_migrate_upgrade, create_mail, create_mongodb, create_login
 from config import Config
-
 import models
 
 game_app = create_app(Config)
@@ -25,7 +24,6 @@ if login_manager:
     @login_manager.user_loader
     def load_user(id_):
         return sql_database.session.get(user_model, int(id_))
-
 
 if __name__ == '__main__':
     game_app.run(debug=True)

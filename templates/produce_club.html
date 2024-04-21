@@ -6,11 +6,11 @@
 </head>
 <body>
     <p>Make your clubs here!</p>
-    <form method="Post" action="">
+    <form id="MakeClubs" method="Post" action="/produce_club/{{ key }}">
         {{ form.hidden_tag() }}
         <div>
             {{ form.howmany.label }}
-            {{ form.howmany(min=0, max=10, step=1, id='Howmany') }}
+            {{ form.howmany(min=1, max=max_clubs , step=1, value=1, id='Howmany') }}
             <p id="RangeValue"></p>
         </div>
         <div>
