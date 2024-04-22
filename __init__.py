@@ -9,6 +9,7 @@ from routes import login_and_registration as lar
 from routes import home_page as hp
 from routes import reset_password as rp
 from routes import player_profile as pp
+from routes import news_board as nb
 
 
 def create_app(config):
@@ -23,6 +24,7 @@ def create_blueprints(app, db, nosql_db, user_model, mail):
     app.register_blueprint(lar.create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail))
     app.register_blueprint(rp.create_reset_password_blueprint(app, db, user_model, mail))
     app.register_blueprint(pp.create_player_profile_blueprint(app, db, nosql_db, user_model, mail))
+    app.register_blueprint(nb.create_news_board_blueprint(app, db, nosql_db, user_model, mail))
 
 
 def create_db(app):

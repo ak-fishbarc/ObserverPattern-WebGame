@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'base.html' %}
+</head>
+<body>
+    {% block body %}
+    <div id="NewestNews">
+        <div id="DisplayImage"><img id="NewsImage" src=""></div>
+        <script src="{{ url_for('static', filename='news_flash.js') }}"></script>
+    </div>
+    {% endblock %}
+</body>
+</html>
