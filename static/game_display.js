@@ -36,6 +36,5 @@ function changeOptionsDisplay(event)
     }
 }
 
-
 document.getElementById('GameDisplay').addEventListener('click', changeOptionsDisplay, false);
 

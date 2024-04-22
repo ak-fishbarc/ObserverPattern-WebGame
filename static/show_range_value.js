@@ -10,3 +10,4 @@ howmany.addEventListener("submit", (event) => {
     event.stopImmediatePropagation();
 });
 
+
