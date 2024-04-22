@@ -8,7 +8,7 @@ const news_space = document.getElementById("NewestNews");
 
 for (let story in news_to_flash)
 {
-    var button = document.createElement("button");
+    let button = document.createElement("button");
     button.onclick = function(e){
     document.getElementById("NewsImage").src = `/static/${news_to_flash[story].image}`, false}
     news_space.appendChild(button);

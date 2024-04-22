@@ -1,5 +1,5 @@
-var range_value = document.getElementById("RangeValue");
-var howmany = document.getElementById("Howmany");
+const range_value = document.getElementById("RangeValue");
+const howmany = document.getElementById("Howmany");
 
 range_value.innerHTML = howmany.value;
 howmany.addEventListener("input", (event) => {

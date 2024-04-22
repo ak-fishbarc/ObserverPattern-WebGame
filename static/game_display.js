@@ -1,5 +1,5 @@
-var display = document.getElementById('GameDisplay');
-var display_context = display.getContext('2d');
+const display = document.getElementById('GameDisplay');
+const display_context = display.getContext('2d');
 
 display_context.fillStyle = "red";
 display_context.fillRect(15, 25, 75, 75);
@@ -13,9 +13,9 @@ function fetchClubs()
     })
     .then(function(html)
     {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(html, "text/html");
-        var js_script = document.createElement("script");
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, "text/html");
+        let js_script = document.createElement("script");
 
         js_script.setAttribute("src", "/static/show_range_value.js");
         js_script.setAttribute("type", "text/javascript");
