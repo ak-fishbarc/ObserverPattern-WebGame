@@ -11,8 +11,8 @@ What I'm trying to build here is a small version of a browser game similar to Gr
 **Currently:**
 - Playing around while buildingg a news display, learning a bit about JavaScript.
 
-  **Added:**
-  - Basic Templates for news page.
+**Added:**
+- Basic Templates for news page.
   
 
 # 21.04.2024:
