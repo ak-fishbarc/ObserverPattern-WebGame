@@ -8,14 +8,28 @@ def create_news_board_blueprint(app, db, nosql_db, user_model, mail):
     @app.route('/news_board/')
     @app.route('/news_board/<page_number>')
     def news_board(page_number=0):
+        number_of_pages = 0
+        paginate_by = 10
+        # Generated news for testing.
         news = {"name": "Somenews", "address": "Someaddress", "image": "/static/news_image.png"}
-        news_to_show = [news for i in range(0, 100)]
-        number_of_pages = int(len(news_to_show)/10)
+        news_to_show = [news for i in range(0, 32)]
+        # Divide news by specified number to get desired number of news per page.
+        if int(len(news_to_show) % paginate_by) != 0:
+            number_of_pages = int(len(news_to_show)/paginate_by) + 1
+        else:
+            number_of_pages = int(len(news_to_show)/paginate_by)
+
         if int(page_number) > number_of_pages:
             return "No more news"
         else:
-            paginate_news = (int(page_number) * 10)
-            limit_to = (int(paginate_news) + 10)
+            # If page number == 0, get first amount of news specified by paginate_by value.
+            # To get the index of next page, multiply page number by paginate_by value.
+            # If paginate_by == 10, e.g. Page 1; Start from index 10. Page 2; Start from index 20.
+            paginate_news = (int(page_number) * paginate_by)
+            # Get desired number of news starting from the paginate_news index.
+            # If page == 2. Start from index 2 * paginate_by value and get news up to index equal to paginate_by value.
+            # E.g. if paginate_by == 10 and page == 2. Start from index 20 and finish on index 30.
+            limit_to = (int(paginate_news) + paginate_by)
             paginated_news = news_to_show[paginate_news:limit_to]
             number_of_pointers = range(0, number_of_pages)
         return render_template('news_board.html', news_to_show=paginated_news, number_of_pages=number_of_pointers)
