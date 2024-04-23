@@ -9,6 +9,16 @@
         <div id="DisplayImage"><img id="NewsImage" src=""></div>
         <script src="{{ url_for('static', filename='news_flash.js') }}"></script>
     </div>
+    <div>
+        {% for news in news_to_show %}
+            <a href="{{ news.address }}"><img src="{{ news.image }}" style="width:100px; height:100px"></a>
+        {% endfor %}
+    </div>
+    <div>
+        {% for page in number_of_pages %}
+            <a href="{{ url_for('news_board', page_number=page) }}">{{ page }}</a>
+        {% endfor %}
+    </div>
     {% endblock %}
 </body>
 </html>
