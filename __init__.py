@@ -26,12 +26,12 @@ def create_app(config):
     return app
 
 
-def create_blueprints(app, db, nosql_db, user_model, mail):
+def create_blueprints(app, db, nosql_db, user_model, mail, notification_manager):
     app.register_blueprint(hp.create_home_page_blueprint(app))
     app.register_blueprint(lar.create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail))
     app.register_blueprint(rp.create_reset_password_blueprint(app, db, user_model, mail))
     app.register_blueprint(pp.create_player_profile_blueprint(app, db, nosql_db, user_model, mail))
-    app.register_blueprint(nb.create_news_board_blueprint(app, db, nosql_db, user_model, mail))
+    app.register_blueprint(nb.create_news_board_blueprint(app, db, nosql_db, user_model, mail, notification_manager))
 
 
 def create_login(app):
