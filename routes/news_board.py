@@ -39,7 +39,7 @@ def create_news_board_blueprint(app, db, nosql_db, user_model, mail):
 
     @app.route('/event_news/<event_id>')
     def event_news(event_id):
-        # I did not wanted to create routes for all the news separetly.
+        # I did not wanted to create routes for all the news separately.
         # This bit of code will read html files from templates/news/ folder and send it
         # to /event_news/ for Javascript to generate page elements out of it.
         # This adds some flexibility to news system.

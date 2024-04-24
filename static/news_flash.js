@@ -4,6 +4,7 @@ const news_space = document.getElementById("NewestNews");
 document.getElementById("NewsImage").src = `${news_to_flash[0].image}`
 
 // Create buttons, links and images for each news that's on the top of the page.
+// Get data from parsed JSON.
 for (let story in news_to_flash)
 {
     let button = document.createElement("button");

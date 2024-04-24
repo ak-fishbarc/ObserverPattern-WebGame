@@ -12,6 +12,13 @@ from routes import player_profile as pp
 from routes import news_board as nb
 
 
+#########################################
+#                                       #
+#       FLASK Creation Functions        #
+#                                       #
+#########################################
+
+
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
@@ -26,6 +33,24 @@ def create_blueprints(app, db, nosql_db, user_model, mail):
     app.register_blueprint(pp.create_player_profile_blueprint(app, db, nosql_db, user_model, mail))
     app.register_blueprint(nb.create_news_board_blueprint(app, db, nosql_db, user_model, mail))
 
+
+def create_login(app):
+    login_mg = LoginManager(app)
+
+    return login_mg
+
+
+def create_mail(app):
+    mail = Mail(app)
+
+    return mail
+
+
+######################################
+#                                    #
+#       SQL Creation Functions       #
+#                                    #
+######################################
 
 def create_db(app):
     sql_db = SQLAlchemy(app)
@@ -59,10 +84,11 @@ def db_migrate_upgrade(app):
         upgrade()
 
 
-def create_mail(app):
-    mail = Mail(app)
-
-    return mail
+#########################################
+#                                       #
+#       NOSQL Creation Functions        #
+#                                       #
+#########################################
 
 
 def create_mongodb(app):
@@ -71,7 +97,3 @@ def create_mongodb(app):
     return mongo_db
 
 
-def create_login(app):
-    login_mg = LoginManager(app)
-
-    return login_mg
