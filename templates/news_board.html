@@ -6,8 +6,8 @@
 <body>
     {% block body %}
     <div id="NewestNews">
-        <div id="DisplayImage"><img id="NewsImage" src=""></div>
-        <script src="{{ url_for('static', filename='news_flash.js') }}"></script>
+        <a id="NewsLink" ><img id="NewsImage" src=""></a>
+        <script id="flash_news" src="{{ url_for('static', filename='news_flash.js') }}" event="{{ news_to_flash }}"></script>
     </div>
     <div>
         {% for news in news_to_show %}

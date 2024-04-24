@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import render_template
+import json
 
 
 def create_news_board_blueprint(app, db, nosql_db, user_model, mail):
@@ -12,6 +13,10 @@ def create_news_board_blueprint(app, db, nosql_db, user_model, mail):
         paginate_by = 10
         # Generated news for testing.
         news = {"name": "Somenews", "address": "/event_news/event_sale", "image": "/static/news_image.png"}
+        # Change news_to_flash to Json for parsing by news_flash.js
+        news_to_flash = [news for i in range(0, 5)]
+        news_to_flash = json.dumps(news_to_flash)
+
         news_to_show = [news for i in range(0, 32)]
         # Divide news by specified number to get desired number of news per page.
         if int(len(news_to_show) % paginate_by) != 0:
@@ -29,7 +34,8 @@ def create_news_board_blueprint(app, db, nosql_db, user_model, mail):
         limit_to = (int(paginate_news) + paginate_by)
         paginated_news = news_to_show[paginate_news:limit_to]
         number_of_pointers = range(0, number_of_pages)
-        return render_template('news_board.html', news_to_show=paginated_news, number_of_pages=number_of_pointers)
+        return render_template('news_board.html', news_to_show=paginated_news, number_of_pages=number_of_pointers,
+                               news_to_flash=news_to_flash)
 
     @app.route('/event_news/<event_id>')
     def event_news(event_id):
