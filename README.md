@@ -9,7 +9,7 @@ What I'm trying to build here is a small version of a browser game similar to Gr
 - Create a function to unsubscribe from in-game events/news system.
 
 **Currently:**
-- Playing around while buildingg a news display, learning a bit about JavaScript.
+- Playing around while building a news display, learning a bit about JavaScript.
 
 **Added:**
 - Basic Templates for news page.
