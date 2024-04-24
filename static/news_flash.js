@@ -2,6 +2,7 @@
 const news_to_flash = JSON.parse(document.getElementById("flash_news").getAttribute("event"))
 const news_space = document.getElementById("NewestNews");
 document.getElementById("NewsImage").src = `${news_to_flash[0].image}`
+document.getElementById("NewsLink").href = `${news_to_flash[0].address}`
 
 // Create buttons, links and images for each news that's on the top of the page.
 // Get data from parsed JSON.
