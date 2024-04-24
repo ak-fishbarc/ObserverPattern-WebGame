@@ -5,6 +5,7 @@ from __init__ import create_app, create_blueprints, create_db, create_models, cr
 from config import Config
 import models
 
+
 game_app = create_app(Config)
 sql_database = create_db(game_app)
 nosql_database = create_mongodb(game_app)

@@ -1,9 +1,18 @@
-var display = document.getElementById('GameDisplay');
-var display_context = display.getContext('2d');
+////////////////
+//   Canvas   //
+////////////////
+
+const display = document.getElementById('GameDisplay');
+const display_context = display.getContext('2d');
 
 display_context.fillStyle = "red";
 display_context.fillRect(15, 25, 75, 75);
 
+/*
+    Fetch html file and parse it in the browser.
+    Create JS Script for the page.
+    Temporarily there's the code for dynamic route.
+*/
 function fetchClubs()
 {
     fetch('/produce_club/Ygplt7XxflI8gO2')
@@ -13,9 +22,9 @@ function fetchClubs()
     })
     .then(function(html)
     {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(html, "text/html");
-        var js_script = document.createElement("script");
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, "text/html");
+        let js_script = document.createElement("script");
 
         js_script.setAttribute("src", "/static/show_range_value.js");
         js_script.setAttribute("type", "text/javascript");
@@ -24,6 +33,12 @@ function fetchClubs()
 
     })
 }
+
+/*
+  Run fetchClubs() when the red square on the Canvas is clicked.
+  Later as the game would get developed, the square could be a Barrack.
+  Clicking on the Barrack would allow for production of different units.
+*/
 
 function changeOptionsDisplay(event)
 {
@@ -35,7 +50,6 @@ function changeOptionsDisplay(event)
         fetchClubs();
     }
 }
-
 
 document.getElementById('GameDisplay').addEventListener('click', changeOptionsDisplay, false);
 

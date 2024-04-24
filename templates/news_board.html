@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'base.html' %}
+</head>
+<body>
+    {% block body %}
+    <div id="NewestNews">
+        <a id="NewsLink" ><img id="NewsImage" src=""></a>
+        <script id="flash_news" src="{{ url_for('static', filename='news_flash.js') }}" event="{{ news_to_flash }}"></script>
+    </div>
+    <div>
+        {% for news in news_to_show %}
+            <a href="{{ news.address }}"><img src="{{ news.image }}" style="width:100px; height:100px"></a>
+        {% endfor %}
+    </div>
+    <div>
+        {% for page in number_of_pages %}
+            <a href="{{ url_for('news_board', page_number=page) }}">{{ page }}</a>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -2,6 +2,8 @@ from communications.notifications import send_notification
 from utility_functions import calculate_time
 
 
+# Unit creation function that waits for the timer to finish, then creates/updates User's
+# file in MongoDB with the amount of units that was produced.
 def create_unit(username, nosql_db, notify, unit_name, how_many, how_long):
     unit_to_make = {'data': unit_name}
     timer_done = calculate_time(how_long)
