@@ -2,6 +2,10 @@
 A project to practice Observer Pattern, Flask, HTML, JavaScript, Postgres, MongoDB, Redis and ideally Docker.
 What I'm trying to build here is a small version of a browser game similar to Grepolis, Travian, etc.
 
+# 24.04.2024
+**Added:**
+- Basic templates for subscription system. Learning from: https://refactoring.guru/design-patterns/observer and https://www.youtube.com/watch?v=_BpmfnqjgzQ
+
 # 22.04.2024:
 **What am I trying to achieve(Intent):**
 - Create template for in-game event/news system.
