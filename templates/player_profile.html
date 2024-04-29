@@ -4,6 +4,22 @@
     {% extends "base.html" %}
 </head>
 <body>
-
+    {% block body %}
+    <div>
+        {% if form %}
+            <p>You are subscribed to News!</p>
+            <form method="Post" action="">
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.unsubscribe.label }}
+                    {{ form.unsubscribe() }}
+                </div>
+                <div>
+                    {{ form.submit() }}
+                </div>
+            </form>
+        {% endif %}
+    </div>
+    {% endblock %}
 </body>
 </html>

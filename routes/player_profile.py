@@ -6,9 +6,10 @@ from units_folder.units_forms import ProduceClubForm
 from units_folder.create_units import create_unit
 from units_folder.units_templates import club
 from utility_functions import calculate_max_number_of_units
+from communications.subscription_form import UnsubscribeForm
 
 
-def create_player_pages_blueprint(app, db, nosql_db, user_model, mail):
+def create_player_pages_blueprint(app, db, nosql_db, user_model, mail, notification_manager):
     player_profile_bp = Blueprint('player_profile', __name__, template_folder='templates')
 
     @app.route('/logout')
@@ -16,10 +17,21 @@ def create_player_pages_blueprint(app, db, nosql_db, user_model, mail):
         logout_user()
         return redirect(url_for('home_page'))
 
-    @app.route('/player_profile/<player>')
+    @app.route('/player_profile/<player>', methods=['POST', 'GET'])
     @login_required
     def player_profile(player):
-        return render_template('player_profile.html', title='Profile')
+        # I need to refactor this code later so that there's no need to keep two "for" loops looking
+        # for the same result.
+        form = False
+        for subscription in notification_manager.subscriptions:
+            if subscription.email == current_user.email:
+                form = UnsubscribeForm()
+        if form and form.validate_on_submit():
+            for subscription in notification_manager.subscriptions:
+                if subscription.email == current_user.email:
+                    notification_manager.unsubscribe(subscription)
+            return redirect(url_for('player_profile', player=current_user.username))
+        return render_template('player_profile.html', title='Profile', user_email=current_user.email, form=form)
 
     @app.route('/game_display/<player>', methods=['POST', 'GET'])
     @login_required
@@ -60,4 +72,5 @@ def create_player_pages_blueprint(app, db, nosql_db, user_model, mail):
                                key='Ygplt7XxflI8gO2')
 
     return player_profile_bp
+
 

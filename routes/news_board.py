@@ -66,3 +66,4 @@ def create_news_board_blueprint(app, db, nosql_db, user_model, mail, notificatio
         return render_template('news_subscription.html', form=form)
 
     return news_board_bp
+
