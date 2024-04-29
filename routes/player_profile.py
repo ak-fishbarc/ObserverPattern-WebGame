@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, logout_user
 import threading
 
 from units_folder.units_forms import ProduceClubForm
@@ -8,13 +8,24 @@ from units_folder.units_templates import club
 from utility_functions import calculate_max_number_of_units
 
 
-def create_player_profile_blueprint(app, db, nosql_db, user_model, mail):
+def create_player_pages_blueprint(app, db, nosql_db, user_model, mail):
     player_profile_bp = Blueprint('player_profile', __name__, template_folder='templates')
 
-    @app.route('/player_profile', methods=['POST', 'GET'])
-    def player_profile():
-        resources = nosql_db.cx['player_profiles'][current_user.username].find_one({'data': 'resources'})
-        return render_template('player_profile.html', title='Profile', resources=resources)
+    @app.route('/logout')
+    def logout():
+        logout_user()
+        return redirect(url_for('home_page'))
+
+    @app.route('/player_profile/<player>')
+    @login_required
+    def player_profile(player):
+        return render_template('player_profile.html', title='Profile')
+
+    @app.route('/game_display/<player>', methods=['POST', 'GET'])
+    @login_required
+    def game_display(player):
+        resources = nosql_db.cx['player_profiles'][player].find_one({'data': 'resources'})
+        return render_template('game_display.html', title='Game Window', resources=resources)
 
     @app.route('/produce_club/<key>', methods=['POST', 'GET'])
     def produce_club(key):
