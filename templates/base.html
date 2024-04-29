@@ -8,6 +8,17 @@
     {% endif %}
 </head>
 <body>
+    {% if current_user.is_anonymous %}
+        <a href="{{ url_for('home_page') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+    {% else %}
+        <a href="{{ url_for('player_profile') }}">Profile</a>
+        <a href="{{ url_for('news_board') }} ">News</a>
+    {% endif %}
+    <div class="nav_menu">
+
+    </div>
     {% block body %}
     {% endblock %}
 </body>
