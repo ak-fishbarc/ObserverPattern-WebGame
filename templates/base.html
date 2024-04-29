@@ -16,6 +16,7 @@
         <a href="{{ url_for('player_profile', player=current_user.username) }}">Profile</a>
         <a href="{{ url_for('game_display', player=current_user.username) }}">Game</a>
         <a href="{{ url_for('news_board') }} ">News</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
     {% endif %}
     <div class="nav_menu">
 

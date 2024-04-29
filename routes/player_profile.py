@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, logout_user
 import threading
 
 from units_folder.units_forms import ProduceClubForm
@@ -10,6 +10,11 @@ from utility_functions import calculate_max_number_of_units
 
 def create_player_pages_blueprint(app, db, nosql_db, user_model, mail):
     player_profile_bp = Blueprint('player_profile', __name__, template_folder='templates')
+
+    @app.route('/logout')
+    def logout():
+        logout_user()
+        return redirect(url_for('home_page'))
 
     @app.route('/player_profile/<player>')
     @login_required
