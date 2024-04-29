@@ -6,6 +6,7 @@ What I'm trying to build here is a small version of a browser game similar to Gr
 **Added:**
 - Navigation bar
 - Logout
+- Option to unsubscribe from News
 
 **Changed:**
 - Player profile was changed to Game Display and separate page for player profile was made.
