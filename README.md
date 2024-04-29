@@ -30,7 +30,6 @@ What I'm trying to build here is a small version of a browser game similar to Gr
 **Added:**
 - Basic Templates for news page.
   
-
 # 21.04.2024:
 **What am I trying to achieve(Intent):**
 - Create a system that will allow user to build units or upgrade buildings without the user feeling or seeing that the page was reloaded in the background.

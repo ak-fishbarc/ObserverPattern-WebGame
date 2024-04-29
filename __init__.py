@@ -96,4 +96,3 @@ def create_mongodb(app):
 
     return mongo_db
 
-

@@ -73,3 +73,4 @@ def create_player_pages_blueprint(app, db, nosql_db, user_model, mail, notificat
 
     return player_profile_bp
 
+

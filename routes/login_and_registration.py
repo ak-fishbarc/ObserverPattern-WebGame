@@ -56,4 +56,3 @@ def create_login_and_registration_blueprint(app, db, nosql_db, user_model, mail)
 
     return login_and_registration_bp
 
-

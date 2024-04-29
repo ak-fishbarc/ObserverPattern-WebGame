@@ -16,3 +16,4 @@ def send_password_reset_email(mail, app, user):
                render_template('reset_password_msg.html', user=user, token=token))
 
 
+

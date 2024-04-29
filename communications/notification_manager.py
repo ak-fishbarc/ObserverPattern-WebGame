@@ -35,3 +35,4 @@ class EmailSubscription(SubscriberInterface):
                    [self.email],
                    render_template(news_text),
                    render_template(news_html))
+

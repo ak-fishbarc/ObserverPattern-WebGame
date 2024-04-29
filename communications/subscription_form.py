@@ -10,3 +10,5 @@ class SubscriptionForm(FlaskForm):
 class UnsubscribeForm(FlaskForm):
     unsubscribe = BooleanField('Unsubscribe')
     submit = SubmitField('Unsubscribe')
+
+
