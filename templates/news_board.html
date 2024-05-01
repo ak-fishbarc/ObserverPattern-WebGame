@@ -5,20 +5,31 @@
 </head>
 <body>
     {% block body %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='news_style.css') }}">
     <div id="NewestNews">
         <a id="NewsLink" ><img id="NewsImage" src=""></a>
-        <script id="flash_news" src="{{ url_for('static', filename='news_flash.js') }}" event="{{ news_to_flash }}"></script>
     </div>
-    <div>
-        {% for news in news_to_show %}
-            <a href="{{ news.address }}"><img src="{{ news.image }}" style="width:100px; height:100px"></a>
-        {% endfor %}
+    <div id="ButtonHolder">
+        <div id="FlashNewsButtons">
+        </div>
+
+    </div>
+    <div id="NewsContainer">
+        <div id="NewsShow">
+            {% for news in news_to_show %}
+                <div id="NewsBlock">
+                    <a id="News" href="{{ news.address }}"><img src="{{ news.image }}" style="width:100%; height:100%"></a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <div>
         {% for page in number_of_pages %}
             <a href="{{ url_for('news_board', page_number=page) }}">{{ page }}</a>
         {% endfor %}
     </div>
+    <script id="flash_news" src="{{ url_for('static', filename='news_flash.js') }}" event="{{ news_to_flash }}"></script>
+
     {% endblock %}
 </body>
 </html>
