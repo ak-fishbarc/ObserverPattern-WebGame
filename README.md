@@ -2,6 +2,10 @@
 A project to practice Observer Pattern, Flask, HTML, JavaScript, Postgres, MongoDB, Redis and ideally Docker.
 What I'm trying to build here is a small version of a browser game similar to Grepolis, Travian, etc.
 
+# 01.05.2024
+**Added:**
+- Css for News Page to change how news are displayed.
+
 # 29.04.2024
 **Added:**
 - Navigation bar
